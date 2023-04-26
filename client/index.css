@@ -1,0 +1,89 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #D1DEDE;
+}
+
+header {
+  margin: 25px;
+}
+
+form {
+  width: 60%;
+  padding: 15px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 20px;
+  color: #E8E9ED;
+  box-shadow: 4px 5px 10px black;
+  background-color: #1F2041;
+}
+
+#task-area {
+  height: 65%;
+  width: 60%;
+  padding: 10px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#task-header {
+  height: 40px;
+  padding: 10px 40px 10px 10px;
+  border-radius: 15px;
+  color: #E8E9ED;
+  box-shadow: 3px 4px 10px black;
+  background-color: #156064;
+}
+
+#task-display {
+  width: 100%;
+  padding: 10px;
+  max-height: 80%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  overflow: auto;
+}
+
+.task {
+  height: 25px;
+  width: 100%;
+  padding-right: 30px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 2px 3px 10px black;
+}
+
+.task-completed {
+  width: 20%;
+}
+
+.task-name {
+  width: 30%;
+}
+
+.task-priority {
+  width: 30%;
+}
+
+.trash-can {
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+  background-color: #D1DEDE;
+}
