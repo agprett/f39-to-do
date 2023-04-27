@@ -35,6 +35,7 @@ form {
 
 #task-header {
   height: 40px;
+  width: 100%;
   padding: 10px 40px 10px 10px;
   border-radius: 15px;
   color: #E8E9ED;
@@ -56,7 +57,7 @@ form {
 
 .task {
   height: 25px;
-  width: 100%;
+  width: 95%;
   padding-right: 30px;
   position: relative;
   display: flex;
