@@ -34,9 +34,10 @@ const addTask = (event) => {
     priority: taskPriorityInput.value
   }
 
-  tasks.push(newTask)
-
-  buildTasks(tasks)
+  axios.post('http://localhost:5478/api/tasks', newTask)
+    .then(res => {
+      buildTasks(res.data)
+    })
 }
 
 newTaskForm.addEventListener('submit', addTask)
