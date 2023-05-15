@@ -27,18 +27,12 @@ module.exports = {
     if(!name || !priority) {
       res.status(400).send('New tasks must have a name and a priority!')
     } else {
-      let newTask = {
-        id: globalId,
-        name,
-        priority,
-        status: false
-      }
-
-      tasks.push(newTask)
-
-      res.status(200).send(tasks)
-
-      globalId++
+       sequelize.query(`
+        INSERT INTO tasks (name, priority)
+        VALUES ('${name}', '${priority}');
+       `)
+        .then(() => res.sendStatus(200))
+        .catch(err => console.log(err))
     }
   }
 }
