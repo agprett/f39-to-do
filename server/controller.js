@@ -1,5 +1,3 @@
-let tasks = [{id: 1, name: 'Take out the trash', priority: 'Medium', status: false}, {id: 2, name: 'Make dinner', priority: 'High', status: false}]
-
 const Sequelize = require('sequelize')
 const {CONNECTION_STRING} = process.env
 
@@ -11,8 +9,6 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
       }
   }
 })
-
-let globalId = 3
 
 module.exports = {
   getTasks: (req, res) => {
@@ -34,5 +30,28 @@ module.exports = {
         .then(() => res.sendStatus(200))
         .catch(err => console.log(err))
     }
+  },
+
+  updateTask: (req, res) => {
+    let {id, status} = req.body
+
+    sequelize.query(`
+      UPDATE tasks
+      SET status = ${!status}
+      WHERE id = ${id}
+    `)
+    .then(() => res.sendStatus(200))
+    .catch(err => console.log(err))
+  },
+
+  deleteTask: (req, res) => {
+    let {id} = req.param
+
+    sequelize.query(`
+      DELETE FROM tasks
+      WHERE id = ${id};
+    `)
+    .then(() => res.sendStatus(200))
+    .catch(err => console.log(err))
   }
 }
