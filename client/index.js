@@ -1,6 +1,13 @@
 let tasksDisplay = document.querySelector('#task-display')
 let newTaskForm = document.querySelector('#new-task-form')
 
+const updateTask = (id, status) => {
+  const body = {id, status}
+
+  axios.put('http://localhost:5478/api/tasks', body)
+  .then(() => getTasks())
+}
+
 const buildTasks = (tasks) => {
   tasksDisplay.innerHTML = ''
 
@@ -8,8 +15,17 @@ const buildTasks = (tasks) => {
     let taskDiv = document.createElement('div')
     taskDiv.classList.add('task')
 
-    taskDiv.innerHTML = `
-      <input class="task-completed" type="checkbox"/>
+    let checkbox = document.createElement('input')
+    checkbox.classList.add('task-completed')
+    checkbox.type = 'checkbox'
+
+    if(task.status){
+      checkbox.setAttribute('checked', true)
+    }
+
+    taskDiv.appendChild(checkbox)
+
+    taskDiv.innerHTML += `
       <p class="task-name">${task.name}</p>
       <p class="task-priority">${task.priority}</p>
       <img
@@ -20,6 +36,13 @@ const buildTasks = (tasks) => {
     `
 
     tasksDisplay.appendChild(taskDiv)
+
+    const allBoxes = document.getElementsByClassName('task-completed')
+    const lastBox = allBoxes[allBoxes.length - 1]
+
+    lastBox.addEventListener('change', () => {
+      updateTask(task.id, task.status)
+    })
   });
 }
 

@@ -12,7 +12,15 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 
 module.exports = {
   getTasks: (req, res) => {
-    sequelize.query('SELECT * FROM tasks;')
+    sequelize.query(`SELECT * FROM tasks
+    ORDER BY status, 
+      CASE priority
+        WHEN 'High' THEN 1
+        WHEN 'Medium' THEN 2
+        WHEN 'Low' THEN 3
+        ELSE 4
+      END
+    ;`)
       .then(dbRes => res.status(200).send(dbRes[0]))
       .catch(err => console.log(err))
   },
@@ -38,7 +46,7 @@ module.exports = {
     sequelize.query(`
       UPDATE tasks
       SET status = ${!status}
-      WHERE id = ${id}
+      WHERE id = ${id};
     `)
     .then(() => res.sendStatus(200))
     .catch(err => console.log(err))
